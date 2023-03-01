@@ -34,13 +34,11 @@ body {
     height: 150px;
   }
 
-  .dropdown-label {
-    color: white;
-  }
-
   label {
-    display: inline-block;
-    margin: 40px 0 10px 45px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 35px 0 10px;
   }
 
   select {
@@ -92,17 +90,19 @@ header a {
     height: 100px;
   }
 
-  .dropdown-label {
-    color: white;
-  }
-
   label {
-    display: inline-block;
-    margin: 13px 0 10px 15px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 20px 0 10px;
   }
 
   select {
     margin: auto;
     display: block;
   }
+}
+
+.dropdown-label {
+  color: white;
 }
