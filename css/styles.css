@@ -1,0 +1,110 @@
+body {
+  font-family: Roboto, sans-serif;
+  background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
+}
+
+/* DESKTOP */
+@media screen and (min-width: 768px) {
+  body {
+    background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
+    background-size: cover;
+    background-color: black;
+  }
+
+  header h2 {
+    margin-left: 180px;
+    font-size: 15px;
+  }
+
+  header a {
+    margin-right: 180px;
+    font-size: 12px;
+  }
+
+  .container {
+    width: 500px;
+  }
+
+  .dropdown-container {
+    margin: auto;
+    margin-top: 180px;
+    background-color: rgba(0, 0, 0, 0.678);
+    border-radius: 3px;
+    width: 300px;
+    height: 150px;
+  }
+
+  label {
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 50px 0 10px;
+  }
+
+  select {
+    margin: auto;
+    display: block;
+    width: 240px;
+  }
+}
+
+.container {
+  width: 1000px;
+  margin: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(99, 56, 13);
+  color: white;
+}
+
+header a {
+  text-decoration: none;
+  color: white;
+}
+
+/* MOBILE */
+@media screen and (max-width: 768px) {
+  header h2 {
+    margin-left: 20px;
+    font-size: 15px;
+  }
+
+  header a {
+    margin-right: 20px;
+    font-size: 12px;
+  }
+
+  .container {
+    width: 330px;
+  }
+
+  .dropdown-container {
+    margin: auto;
+    margin-top: 180px;
+    background-color: rgba(0, 0, 0, 0.678);
+    border-radius: 3px;
+    width: 220px;
+    height: 100px;
+  }
+
+  label {
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+
+  select {
+    margin: auto;
+    display: block;
+    width: 200px;
+  }
+}
+
+.dropdown-label {
+  color: white;
+}

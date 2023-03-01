@@ -1,20 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
+  <title>Yellowstone Activities</title>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-  <header>
+  <header class="navbar">
+    <h2>Yellowstone Activities</h2>
+    <div>
+      <a href="#">My Activities</a>
+    </div>
   </header>
-  <main>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  <div class="container">
+    <main>
+
+      <div class="dropdown-container">
+        <div>
+          <label for="activity-select" class="dropdown-label">Choose your activity:</label>
+        </div>
+        <select name="activities" id="activity-select">
+        </select>
+      </div>
+
+
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </div>
 </body>
+
 </html>
