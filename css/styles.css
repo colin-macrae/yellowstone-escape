@@ -79,7 +79,6 @@ body {
   }
 
   .info-category {
-    /* display: flex; */
     line-height: 1.5;
     padding: 0;
     margin: 0 10px 10px;
@@ -201,7 +200,6 @@ header a {
   }
 
   .info-category {
-    /* display: flex; */
     line-height: 1.5;
     padding: 0;
     margin: 0 10px 10px;

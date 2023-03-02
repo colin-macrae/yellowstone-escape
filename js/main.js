@@ -37,6 +37,7 @@ $viewSwap(data.view);
 
 function renderViewingEntry() {
   document.querySelector('.activity-image').src = data.viewing.images[0].url;
+  document.querySelector('.activity-image').alt = data.viewing.images[0].alt;
 
   document.querySelector('.activity-card-title').innerHTML = data.viewing.title;
 
