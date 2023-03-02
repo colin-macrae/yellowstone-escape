@@ -3,7 +3,7 @@ body {
   background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
 }
 
-/* DESKTOP */
+/* ///////////////////////////////DESKTOP/ */
 @media screen and (min-width: 768px) {
   body {
     background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
@@ -31,7 +31,7 @@ body {
     background-color: rgba(0, 0, 0, 0.678);
     border-radius: 3px;
     width: 300px;
-    height: 150px;
+    height: 180px;
   }
 
   label {
@@ -45,6 +45,73 @@ body {
     margin: auto;
     display: block;
     width: 240px;
+  }
+
+  .activity-card img {
+    width: 45%;
+    border-radius: 10px 0 0 10px;
+  }
+
+  .activity-card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(228, 227, 227);
+    margin-bottom: 30px;
+    position: relative;
+  }
+
+  .activity-card-text-container {
+    padding: 25px;
+  }
+
+  .info-category,
+  .activity-card-title,
+  .activity-card-description {
+    margin: 0 10px;
+  }
+
+  .activity-card-description {
+    margin-bottom: 20px;
+    background-color: rgba(89, 62, 28, 0.175);
+    border-radius: 2px;
+    padding: 5px;
+  }
+
+  .info-category {
+    line-height: 1.5;
+    padding: 0;
+    margin: 0 10px 10px;
+  }
+
+  .activity-card a {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    text-decoration: none;
+  }
+
+  .container h2 {
+    margin: 0 10px 10px;
+  }
+
+  .selected-activity-view h1 {
+    color: white;
+    margin: 35px 0 15px;
+    padding: 5px;
+  }
+
+  .info-category-last {
+    margin-bottom: 60px;
+  }
+
+  .info-category-label {
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  .home-button {
+    margin-right: 50px;
   }
 }
 
@@ -66,7 +133,7 @@ header a {
   color: white;
 }
 
-/* MOBILE */
+/* ///////////////////////////////MOBILE/ */
 @media screen and (max-width: 768px) {
   header h2 {
     margin-left: 20px;
@@ -88,7 +155,7 @@ header a {
     background-color: rgba(0, 0, 0, 0.678);
     border-radius: 3px;
     width: 220px;
-    height: 100px;
+    height: 130px;
   }
 
   label {
@@ -103,8 +170,93 @@ header a {
     display: block;
     width: 200px;
   }
+
+  .activity-card img {
+    width: 100%;
+    margin-bottom: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .activity-card {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid rgb(228, 227, 227);
+    margin: 0 0 30px;
+    position: relative;
+  }
+
+  .info-category,
+  .activity-card-title,
+  .activity-card-description {
+    margin: 0 10px;
+  }
+
+  .activity-card-description {
+    margin-bottom: 20px;
+    background-color: rgba(89, 62, 28, 0.175);
+    border-radius: 2px;
+    padding: 5px;
+  }
+
+  .info-category {
+    line-height: 1.5;
+    padding: 0;
+    margin: 0 10px 10px;
+  }
+
+  .info-category-label {
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  .activity-card a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-decoration: none;
+  }
+
+  .container h2 {
+    margin: 0 10px 10px;
+  }
+
+  .selected-activity-view h1 {
+    color: white;
+    margin: 5px 0;
+    padding: 5px;
+    font-size: 18px;
+  }
+
+  .info-category-last {
+    margin-bottom: 60px;
+  }
 }
 
 .dropdown-label {
   color: white;
+}
+
+option {
+  text-align: center;
+}
+
+.go-button button {
+  color: white;
+  height: 30px;
+  width: 90px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(99, 56, 13);
+}
+
+.go-button {
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  margin: 20px 0;
+}
+
+.hide {
+  display: none;
 }
