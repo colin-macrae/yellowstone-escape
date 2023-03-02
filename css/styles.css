@@ -105,7 +105,7 @@ body {
     margin: 0 10px 10px 10px;
   }
 
-  .selected-activities-screen h1 {
+  .selected-activities-view h1 {
     color: white;
     /* background-color: rgba(0, 0, 0, 0.424);
   border-radius: 10px; */
@@ -220,7 +220,7 @@ header a {
     margin: 0 10px 10px 10px;
   }
 
-  .selected-activities-screen h1 {
+  .selected-activities-view h1 {
     color: white;
     /* background-color: rgba(0, 0, 0, 0.424);
   border-radius: 10px; */

@@ -38,6 +38,23 @@ $submit.addEventListener('submit', function (e) {
       data.viewing = data.apiData[i];
       console.log(data.viewing);
       // return;
-    };
+    }
   }
+  // viewswap()
+
 });
+
+function $viewSwap(viewName) {
+  if (viewName === 'home-view') {
+    document.querySelector('.home-view').className = 'dropdown-container home-view';
+    document.querySelector('.selected-activities-view').className = 'container selected-activities-view hide';
+    // document.querySelector('.entries-new').className = 'entries-new';
+    data.view = 'home-view';
+  } if (viewName === 'selected-activity-view') {
+    document.querySelector('.selected-activity-view').className = 'container selected-activities-view';
+    document.querySelector('.home-view').className = 'dropdown-container home-view hide';
+    // document.querySelector('.entries-new').className = 'entries-new hide';
+    data.view = 'selected-activity-view';
+  }
+}
+$viewSwap('home-view');

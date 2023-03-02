@@ -3,5 +3,6 @@ var data = {
   savedActivities: [],
   editing: [],
   apiData: {},
-  viewing: {}
+  viewing: {},
+  view: 'home-view'
 };
