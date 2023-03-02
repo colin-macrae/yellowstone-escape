@@ -1,5 +1,7 @@
 /* exported data */
 var data = {
   savedActivities: [],
-  editing: []
+  editing: [],
+  apiData: {},
+  viewing: {}
 };

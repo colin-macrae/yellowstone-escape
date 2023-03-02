@@ -18,19 +18,59 @@
   <header class="navbar">
     <h2>Yellowstone Activities</h2>
     <div>
+      <a href="#" class="selected-activity-view">Home</a>
       <a href="#">My Activities</a>
     </div>
   </header>
   <div class="container">
     <main>
-
-      <div class="dropdown-container">
+      <!-- HOME SCREEN -->
+      <div class="dropdown-container home-view hid">
         <div>
           <label for="activity-select" class="dropdown-label">Choose your activity:</label>
         </div>
-        <select name="activities" id="activity-select">
-        </select>
+        <form>
+          <select name="activities" id="activity-select">
+            <option>---Select one---</option>
+          </select>
+          <div class="go-button"><button>Go</button></div>
+        </form>
       </div>
+
+      <!-- SELECTED ACTIVITIES SCREEN -->
+      <div class="container selected-activities-screen hide">
+        <h1 class="selected-activity">Selected Activity</h1>
+        <div class="activity-card">
+
+          <img src="https://www.planetware.com/photos-large/USWY/usa-wyoming-yellowstone-grand-prismatic-spring.jpg"/>
+
+          <div class="activity-card-text-container">
+            <h2 class="activity-card-title">Natural Bridge Trail</h2>
+            <p class="activity-card-description">Hike through a forest and along an old service road to ...</p>
+            <div class="info-category location">
+              <div>Location:&nbsp;&nbsp;</div>
+              <div>Canyon Village</div>
+            </div>
+            <div class="info-category duration">
+              <div>Duration:&nbsp;&nbsp;</div>
+              <div>2-4 Hours</div>
+            </div>
+            <div class="info-category accessibility">
+              <div>Accessibility:&nbsp;&nbsp;</div>
+              <div>Not recommended for visitors with heart problems</div>
+            </div>
+            <div class="info-category fees info-category-last">
+              <div>Fees:&nbsp;&nbsp;</div>
+              <div>It's free!</div>
+            </div>
+            <a href="#">Add to My Activities</a>
+          </div>
+
+        </div>
+      </div>
+
+
+
 
 
     </main>
