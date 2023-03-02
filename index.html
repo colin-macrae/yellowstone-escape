@@ -18,7 +18,7 @@
   <header class="navbar">
     <h2>Yellowstone Activities</h2>
     <div>
-      <a href="#" class="selected-activity-view">Home</a>
+      <a href="#" class="home-button hide">Home</a>
       <a href="#">My Activities</a>
     </div>
   </header>
@@ -38,13 +38,35 @@
       </div>
 
       <!-- SELECTED ACTIVITIES SCREEN -->
-      <div class="container selected-activities-view hide">
+      <div class="container selected-activity-view hide">
         <h1 class="selected-activity">Selected Activity</h1>
         <div class="activity-card">
 
-          <img src="https://www.planetware.com/photos-large/USWY/usa-wyoming-yellowstone-grand-prismatic-spring.jpg"/>
+          <img src="#" class="activity-image"/>
 
           <div class="activity-card-text-container">
+            <h2 class="activity-card-title"></h2>
+            <p class="activity-card-description"></p>
+            <div class="info-category">
+              <div class="info-category-label">Location:&nbsp;&nbsp;</div>
+              <div class="location"></div>
+            </div>
+            <div class="info-category">
+              <div class="info-category-label">Duration:&nbsp;&nbsp;</div>
+              <div class="duration"></div>
+            </div>
+            <div class="info-category">
+              <div class="info-category-label">Accessibility:&nbsp;&nbsp;</div>
+              <div class="accessibility"></div>
+            </div>
+            <div class="info-category info-category-last">
+              <div class="info-category-label">Fees:&nbsp;&nbsp;</div>
+              <div class="fees"></div>
+            </div>
+            <a href="#">Add to My Activities</a>
+          </div>
+
+          <!-- <div class="activity-card-text-container">
             <h2 class="activity-card-title">Natural Bridge Trail</h2>
             <p class="activity-card-description">Hike through a forest and along an old service road to ...</p>
             <div class="info-category location">
@@ -64,7 +86,7 @@
               <div>It's free!</div>
             </div>
             <a href="#">Add to My Activities</a>
-          </div>
+          </div> -->
 
         </div>
       </div>

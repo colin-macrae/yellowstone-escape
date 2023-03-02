@@ -57,9 +57,8 @@ body {
     background-color: white;
     border-radius: 10px;
     border: 1px solid rgb(228, 227, 227);
-    margin: 0 0 30px 0;
+    margin-bottom: 30px;
     position: relative;
-    /* height: 500px; */
   }
 
   .activity-card-text-container {
@@ -69,12 +68,8 @@ body {
   .info-category,
   .activity-card-title,
   .activity-card-description {
-    margin: 0 10px 0 10px;
+    margin: 0 10px;
   }
-
-  /* .activity-card-title {
-    margin: 10px 0 0 0;
-  } */
 
   .activity-card-description {
     margin-bottom: 20px;
@@ -84,15 +79,11 @@ body {
   }
 
   .info-category {
-    display: flex;
+    /* display: flex; */
     line-height: 1.5;
     padding: 0;
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 10px;
   }
-
-  /* .activity-card:last-child {
-  margin-bottom: 30px;
-} */
 
   .activity-card a {
     position: absolute;
@@ -102,19 +93,26 @@ body {
   }
 
   .container h2 {
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 10px;
   }
 
-  .selected-activities-view h1 {
+  .selected-activity-view h1 {
     color: white;
-    /* background-color: rgba(0, 0, 0, 0.424);
-  border-radius: 10px; */
-    margin: 35px 0 15px 0;
-    padding: 5px 5px 5px 5px;
+    margin: 35px 0 15px;
+    padding: 5px;
   }
 
   .info-category-last {
     margin-bottom: 60px;
+  }
+
+  .info-category-label {
+    font-size: 20px;
+    text-decoration: underline;
+  }
+
+  .home-button {
+    margin-right: 50px;
   }
 }
 
@@ -185,7 +183,7 @@ header a {
     background-color: white;
     border-radius: 10px;
     border: 1px solid rgb(228, 227, 227);
-    margin: 0 0 30px 0;
+    margin: 0 0 30px;
     position: relative;
   }
 
@@ -203,10 +201,15 @@ header a {
   }
 
   .info-category {
-    display: flex;
+    /* display: flex; */
     line-height: 1.5;
     padding: 0;
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 10px;
+  }
+
+  .info-category-label {
+    font-size: 20px;
+    text-decoration: underline;
   }
 
   .activity-card a {
@@ -217,15 +220,13 @@ header a {
   }
 
   .container h2 {
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 10px;
   }
 
-  .selected-activities-view h1 {
+  .selected-activity-view h1 {
     color: white;
-    /* background-color: rgba(0, 0, 0, 0.424);
-  border-radius: 10px; */
-    margin: 5px 0 5px 0;
-    padding: 5px 5px 5px 5px;
+    margin: 5px 0;
+    padding: 5px;
     font-size: 18px;
   }
 
@@ -238,28 +239,26 @@ header a {
   color: white;
 }
 
-.hide {
-  display: none;
-}
-
 option {
   text-align: center;
 }
 
 .go-button button {
-  /* display: inline-block; */
   color: white;
   height: 30px;
   width: 90px;
   border: none;
   border-radius: 5px;
-  background-color:rgb(99, 56, 13);
+  background-color: rgb(99, 56, 13);
 }
 
 .go-button {
   display: flex;
   justify-content: center;
   height: 20px;
-  /* padding: 20px; */
   margin: 20px 0;
+}
+
+.hide {
+  display: none;
 }

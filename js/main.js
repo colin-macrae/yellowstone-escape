@@ -6,9 +6,7 @@ function $createAndAppend() {
   xhr.responseType = 'json';
 
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
     data.apiData = xhr.response.data;
-    // console.log(data.apiData[0].title);
     for (var i = 0; i < xhr.response.data.length; i++) {
       var thingToDo = xhr.response.data[i];
       var $option = document.createElement('option');
@@ -19,42 +17,49 @@ function $createAndAppend() {
   xhr.send();
 }
 
-// document.querySelector('activity-card-title').textContent =
-
-// var $dropdown = document.querySelector('option');
-// $dropdown.addEventListener('change', function() {
-//   console.log(event.target.textContent);
-// });
 var $submit = document.querySelector('form');
 $submit.addEventListener('submit', function (e) {
   e.preventDefault();
-  // console.log('submitted console');
-  // console.log(document.forms[0].elements.activities.value);
-  // console.log(data.apiData[0].title);
-
   for (var i = 0; i < data.apiData.length; i++) {
     if (data.apiData[i].title === document.forms[0].elements.activities.value) {
-      // console.log('match', data.apiData[i]);
       data.viewing = data.apiData[i];
-      console.log(data.viewing);
-      // return;
     }
   }
-  // viewswap()
-
+  renderViewingEntry();
+  $viewSwap('selected-activity-view');
 });
+
+if (data.viewing !== {}) {
+  renderViewingEntry();
+}
+
+$viewSwap(data.view);
+
+function renderViewingEntry() {
+  document.querySelector('.activity-image').src = data.viewing.images[0].url;
+
+  document.querySelector('.activity-card-title').innerHTML = data.viewing.title;
+
+  document.querySelector('.activity-card-description').innerHTML = data.viewing.shortDescription;
+
+  document.querySelector('.location').innerHTML = data.viewing.locationDescription;
+
+  document.querySelector('.duration').innerHTML = data.viewing.duration;
+
+  document.querySelector('.accessibility').innerHTML = data.viewing.accessibilityInformation;
+
+  document.querySelector('.fees').innerHTML = data.viewing.doFeesApply;
+}
 
 function $viewSwap(viewName) {
   if (viewName === 'home-view') {
     document.querySelector('.home-view').className = 'dropdown-container home-view';
-    document.querySelector('.selected-activities-view').className = 'container selected-activities-view hide';
-    // document.querySelector('.entries-new').className = 'entries-new';
+    document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
     data.view = 'home-view';
   } if (viewName === 'selected-activity-view') {
-    document.querySelector('.selected-activity-view').className = 'container selected-activities-view';
+    document.querySelector('.selected-activity-view').className = 'container selected-activity-view';
     document.querySelector('.home-view').className = 'dropdown-container home-view hide';
-    // document.querySelector('.entries-new').className = 'entries-new hide';
+    document.querySelector('.home-button').className = 'home-button';
     data.view = 'selected-activity-view';
   }
 }
-$viewSwap('home-view');
