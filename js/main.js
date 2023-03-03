@@ -64,3 +64,10 @@ function $viewSwap(viewName) {
     data.view = 'selected-activity-view';
   }
 }
+
+var $homeButton = document.querySelector('.home-button');
+$homeButton.addEventListener('click', goToHome);
+function goToHome() {
+  $viewSwap('home-view');
+  data.viewing = {};
+}
