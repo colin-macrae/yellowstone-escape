@@ -2,11 +2,13 @@ body {
   font-family: Roboto, sans-serif;
   background-size: cover;
   background-color: rgb(32, 47, 33);
-
-  /* background-image: url("https://mfiles.alphacoders.com/629/629576.jpg"); */
 }
 
-/* ///////////////////////////////DESKTOP/ */
+img {
+  object-fit: cover;
+}
+
+/* /////////////////////////////////////DESKTOP */
 @media screen and (min-width: 768px) {
   header h2 {
     margin-left: 180px;
@@ -243,7 +245,7 @@ header a {
 
   .my-activities-view-label {
     color: white;
-    margin: 5px 0 -10px 0;
+    margin: 5px 0 -10px;
     padding: 5px;
     font-size: 18px;
   }
@@ -292,8 +294,5 @@ option {
 }
 
 .unordered-list {
-  /* text-decoration: none; */
   padding: 0;
-
-  /* list-style-type: none; */
 }

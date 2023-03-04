@@ -4,10 +4,13 @@ if (data.viewing !== null) {
 $viewSwap(data.view);
 document.addEventListener('DOMContentLoaded', $createAndAppend);
 
+// API REQUESTS
+var targetUrl = encodeURIComponent('https://developer.nps.gov/api/v1/thingstodo?parkCode=yell&api_key=iSpPR5udcPCzijjVFDgRMe2hLAfepOt9jbFeGFjX');
+
 function $createAndAppend() {
   var $select = document.querySelector('select');
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://developer.nps.gov/api/v1/thingstodo?parkCode=yell&api_key=iSpPR5udcPCzijjVFDgRMe2hLAfepOt9jbFeGFjX');
+  xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
   xhr.responseType = 'json';
 
   xhr.addEventListener('load', function () {
@@ -22,33 +25,8 @@ function $createAndAppend() {
   xhr.send();
 }
 
-// var targetUrl = encodeURIComponent('https://developer.nps.gov/api/v1/thingstodo?parkCode=yell&api_key=iSpPR5udcPCzijjVFDgRMe2hLAfepOt9jbFeGFjX');
-
-// document.addEventListener('DOMContentLoaded', $createAndAppend);
-
-// function $createAndAppend() {
-//   var $select = document.querySelector('select');
-//   var xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
-//   xhr.responseType = 'json';
-
-//   xhr.addEventListener('load', function () {
-//     data.apiData = xhr.response.data;
-//     for (var i = 0; i < xhr.response.data.length; i++) {
-//       var thingToDo = xhr.response.data[i];
-//       var $option = document.createElement('option');
-//       $option.textContent = thingToDo.title;
-//       $select.appendChild($option);
-//     }
-//   });
-//   xhr.send();
-// }
-
-
-
 var $submit = document.querySelector('form');
 $submit.addEventListener('submit', function (e) {
-  // e.preventDefault();
   for (var i = 0; i < data.apiData.length; i++) {
     if (data.apiData[i].title === document.forms[0].elements.activities.value) {
       data.viewing = data.apiData[i];
@@ -76,13 +54,11 @@ function $viewSwap(viewName) {
   if (viewName === 'home-view') {
     document.querySelector('.home-view').className = 'dropdown-container home-view';
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
-    // document.querySelector('.my-activities-view').className = 'container my-activities-view hide';
     document.querySelector('.home-button').className = 'home-button hide';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-button').className = 'my-activities-button';
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
-    // 'my-activities-view-label hide'
     data.view = 'home-view';
   } if (viewName === 'selected-activity-view') {
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view';
@@ -92,11 +68,8 @@ function $viewSwap(viewName) {
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
     data.view = 'selected-activity-view';
-    // else {
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
-    // }
   } if (viewName === 'my-activities-view') {
-    // document.querySelector('.my-activities-view').className = 'container my-activities-view';
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
     document.querySelector('.home-view').className = 'dropdown-container home-view hide';
     document.querySelector('.unordered-list').className = 'unordered-list';
@@ -135,23 +108,13 @@ function goToHome() {
   $viewSwap('home-view');
 }
 
-// if (data.savedActivities.length === 0) {
-//   document.querySelector('.nothing-saved').className = 'nothing-saved';
-// }
-
 var $addActivityButton = document.querySelector('.add-entry-button');
 $addActivityButton.addEventListener('click', $addEntryAndGoTo);
 function $addEntryAndGoTo(e) {
-  // console.log(data.viewing);
-  // console.log(data.nextSavedActivityId);
   data.viewing.savedActivityId = data.nextSavedActivityId;
-  console.log(data.viewing.savedActivityId);
   data.nextSavedActivityId += 1;
-  console.log(data.viewing.savedActivityId);
   data.savedActivities.unshift(data.viewing);
-  console.log(data.savedActivities);
   document.querySelector('.my-activities-button').setAttribute('class', 'my-activities-button hide');
-  // $renderSavedActivities();
   for (var i = 0; i < data.savedActivities.length; i++) {
     $renderSavedActivities(data.savedActivities[i]);
   }
@@ -159,32 +122,11 @@ function $addEntryAndGoTo(e) {
   location.reload();
 }
 
-// if (data.view === 'my-activities-view') {
-//   $renderSavedActivities();
-// }
-// data.savedActivities[0]
-// $viewSwap('my-activities-view');
-
-console.log('data.savedActivities are', data.savedActivities);
-console.log('data view is', data.view);
-// $renderSavedActivities(data.savedActivities[2]);
-// savedActivityObject
-
-// var $selectedActivityViewContainer = document.createElement('div');
-// $selectedActivityViewContainer.setAttribute('class', 'container my-activities-view');
-
 var $selectedActivity = document.createElement('h1');
 $selectedActivity.setAttribute('class', 'selected-activity');
 $selectedActivity.textContent = '';
 
 function $renderSavedActivities(savedActivityObject) {
-  // // "No Saved Activities Text"
-  // var $noActivitiesDiv = document.createElement('div');
-  // // $noActivitiesDiv.textContent = 'No activities have been saved.  What are you waiting for?';
-  // var $noActivitiesP = document.createElement('p');
-  // $noActivitiesP.setAttribute('class', 'nothing-saved'); // keep this redundant code (it's in html) hidden or unlink from here and delete
-  // $noActivitiesP.textContent = 'delete these';
-  // $noActivitiesDiv.appendChild($noActivitiesP);
 
   var $myActivitiesContainer = document.createElement('div');
   $myActivitiesContainer.setAttribute('class', 'container my-activities-view');
@@ -195,8 +137,8 @@ function $renderSavedActivities(savedActivityObject) {
   $myActivitiesContainer.appendChild($activityCard);
 
   var $image = document.createElement('img');
-  // $image.setAttribute('src', savedActivityObject.url);
-  $image.setAttribute('src', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/buffalo-herd-in-yellowstone-national-park-randall-nyhof.jpg');
+  $image.setAttribute('src', 'https://www.nps.gov/common/uploads/cropped_image/44AEEA15-1DD8-B71B-0BA7357E1BA0E948.jpg');
+
   $activityCard.appendChild($image);
 
   var $activityCardTextContainer = document.createElement('div');
@@ -280,13 +222,8 @@ function $renderSavedActivities(savedActivityObject) {
 
   // Append to UL element
   var $unorderedList = document.querySelector('.unordered-list');
-  // $selectedActivityViewContainer.appendChild($myActivitiesContainer);
-  // $selectedActivityViewContainer.appendChild($myActivitiesContainer);
   $unorderedList.appendChild($myActivitiesContainer);
-
-  // return $noActivitiesDiv;
 }
-console.log('data view is', data.view);
 
 for (var i = 0; i < data.savedActivities.length; i++) {
   $renderSavedActivities(data.savedActivities[i]);
