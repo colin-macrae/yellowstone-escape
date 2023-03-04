@@ -4,7 +4,7 @@ var data = {
   nextSavedActivityId: 1,
   editing: [],
   apiData: {},
-  viewing: {},
+  viewing: null,
   view: 'home-view'
 };
 // console.log(data);

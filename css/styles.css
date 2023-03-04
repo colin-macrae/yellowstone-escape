@@ -2,6 +2,7 @@ body {
   font-family: Roboto, sans-serif;
   background-size: cover;
   background-color: rgb(32, 47, 33);
+
   /* background-image: url("https://mfiles.alphacoders.com/629/629576.jpg"); */
 }
 
@@ -119,6 +120,12 @@ body {
     font-size: 28px;
     margin-top: 180px;
   }
+
+  .my-activities-view-label {
+    color: white;
+    margin: 35px 0 15px;
+    padding: 5px;
+  }
 }
 
 .container {
@@ -234,6 +241,13 @@ header a {
     font-size: 18px;
   }
 
+  .my-activities-view-label {
+    color: white;
+    margin: 5px 0 -10px 0;
+    padding: 5px;
+    font-size: 18px;
+  }
+
   .info-category-last {
     margin-bottom: 60px;
   }
@@ -280,5 +294,6 @@ option {
 .unordered-list {
   /* text-decoration: none; */
   padding: 0;
+
   /* list-style-type: none; */
 }

@@ -1,4 +1,9 @@
+if (data.viewing !== null) {
+  renderViewingEntry();
+}
+$viewSwap(data.view);
 document.addEventListener('DOMContentLoaded', $createAndAppend);
+
 function $createAndAppend() {
   var $select = document.querySelector('select');
   var xhr = new XMLHttpRequest();
@@ -17,9 +22,33 @@ function $createAndAppend() {
   xhr.send();
 }
 
+// var targetUrl = encodeURIComponent('https://developer.nps.gov/api/v1/thingstodo?parkCode=yell&api_key=iSpPR5udcPCzijjVFDgRMe2hLAfepOt9jbFeGFjX');
+
+// document.addEventListener('DOMContentLoaded', $createAndAppend);
+
+// function $createAndAppend() {
+//   var $select = document.querySelector('select');
+//   var xhr = new XMLHttpRequest();
+//   xhr.open('GET', 'https://lfz-cors.herokuapp.com/?url=' + targetUrl);
+//   xhr.responseType = 'json';
+
+//   xhr.addEventListener('load', function () {
+//     data.apiData = xhr.response.data;
+//     for (var i = 0; i < xhr.response.data.length; i++) {
+//       var thingToDo = xhr.response.data[i];
+//       var $option = document.createElement('option');
+//       $option.textContent = thingToDo.title;
+//       $select.appendChild($option);
+//     }
+//   });
+//   xhr.send();
+// }
+
+
+
 var $submit = document.querySelector('form');
 $submit.addEventListener('submit', function (e) {
-  e.preventDefault();
+  // e.preventDefault();
   for (var i = 0; i < data.apiData.length; i++) {
     if (data.apiData[i].title === document.forms[0].elements.activities.value) {
       data.viewing = data.apiData[i];
@@ -28,12 +57,6 @@ $submit.addEventListener('submit', function (e) {
   renderViewingEntry();
   $viewSwap('selected-activity-view');
 });
-
-if (data.viewing !== {}) {
-  renderViewingEntry();
-}
-
-$viewSwap(data.view);
 
 function renderViewingEntry() {
   document.querySelector('.activity-image').src = data.viewing.images[0].url;
@@ -44,6 +67,9 @@ function renderViewingEntry() {
   document.querySelector('.duration').innerHTML = data.viewing.duration;
   document.querySelector('.accessibility').innerHTML = data.viewing.accessibilityInformation;
   document.querySelector('.fees').innerHTML = data.viewing.doFeesApply;
+  if (data.viewing.doFeesApply === 'false') {
+    data.viewing.doFeesApply = 'No fees';
+  }
 }
 
 function $viewSwap(viewName) {
@@ -54,6 +80,9 @@ function $viewSwap(viewName) {
     document.querySelector('.home-button').className = 'home-button hide';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-button').className = 'my-activities-button';
+    document.querySelector('.nothing-saved').className = 'nothing-saved hide';
+    document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
+    // 'my-activities-view-label hide'
     data.view = 'home-view';
   } if (viewName === 'selected-activity-view') {
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view';
@@ -61,7 +90,11 @@ function $viewSwap(viewName) {
     document.querySelector('.home-button').className = 'home-button';
     document.querySelector('.my-activities-button').className = 'my-activities-button';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
+    document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
     data.view = 'selected-activity-view';
+    // else {
+    document.querySelector('.nothing-saved').className = 'nothing-saved hide';
+    // }
   } if (viewName === 'my-activities-view') {
     // document.querySelector('.my-activities-view').className = 'container my-activities-view';
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
@@ -69,7 +102,11 @@ function $viewSwap(viewName) {
     document.querySelector('.unordered-list').className = 'unordered-list';
     document.querySelector('.home-button').className = 'home-button';
     document.querySelector('.my-activities-button').className = 'my-activities-button hide';
+    document.querySelector('.my-activities-view-label').className = 'my-activities-view-label';
     data.view = 'my-activities-view';
+    if (data.savedActivities.length === 0) {
+      document.querySelector('.nothing-saved').className = 'nothing-saved';
+    }
   }
 }
 
@@ -114,11 +151,12 @@ function $addEntryAndGoTo(e) {
   data.savedActivities.unshift(data.viewing);
   console.log(data.savedActivities);
   document.querySelector('.my-activities-button').setAttribute('class', 'my-activities-button hide');
-  $viewSwap('my-activities-view');
   // $renderSavedActivities();
   for (var i = 0; i < data.savedActivities.length; i++) {
     $renderSavedActivities(data.savedActivities[i]);
   }
+  $viewSwap('my-activities-view');
+  location.reload();
 }
 
 // if (data.view === 'my-activities-view') {
@@ -157,7 +195,8 @@ function $renderSavedActivities(savedActivityObject) {
   $myActivitiesContainer.appendChild($activityCard);
 
   var $image = document.createElement('img');
-  $image.setAttribute('src', savedActivityObject.url);
+  // $image.setAttribute('src', savedActivityObject.url);
+  $image.setAttribute('src', 'https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/buffalo-herd-in-yellowstone-national-park-randall-nyhof.jpg');
   $activityCard.appendChild($image);
 
   var $activityCardTextContainer = document.createElement('div');
@@ -227,6 +266,9 @@ function $renderSavedActivities(savedActivityObject) {
   $infoCategoryFeesInfo.setAttribute('class', 'fees');
   $infoCategoryFeesLabel.textContent = 'Fees:  ';
   $infoCategoryFeesInfo.textContent = savedActivityObject.doFeesApply;
+  if ($infoCategoryFeesInfo.textContent === 'false') {
+    $infoCategoryFeesInfo.textContent = 'No fees';
+  }
   $feesInfoCategoryDiv.appendChild($infoCategoryFeesLabel);
   $feesInfoCategoryDiv.appendChild($infoCategoryFeesInfo);
 
@@ -246,39 +288,6 @@ function $renderSavedActivities(savedActivityObject) {
 }
 console.log('data view is', data.view);
 
-// console.log($renderSavedActivities());
-
-// function renderEntry(entry) {
-//   var $entryDomTree = document.createElement('li');
-//   $entryDomTree.setAttribute('class', 'entries');
-//   $entryDomTree.setAttribute('data-entry-id', entry.entryId);
-
-//   var $entryImage = document.createElement('img');
-//   $entryImage.setAttribute('src', entry.url);
-//   $entryImage.setAttribute('class', 'column-half');
-
-//   var $entryTitleAndNotesDiv = document.createElement('div');
-//   $entryTitleAndNotesDiv.setAttribute('class', 'title-and-notes');
-
-//   var $entryTitleDiv = document.createElement('div');
-
-//   var $entryTitle = document.createElement('h2');
-//   $entryTitle.setAttribute('class', 'entry-title');
-//   $entryTitle.textContent = entry.title;
-
-//   var $penIcon = document.createElement('i');
-//   $penIcon.setAttribute('class', 'fa-solid fa-pen');
-
-//   var $entryNotes = document.createElement('p');
-//   $entryNotes.setAttribute('class', 'entry-notes');
-//   $entryNotes.textContent = entry.notes;
-
-//   $entryDomTree.appendChild($entryImage);
-//   $entryDomTree.appendChild($entryTitleAndNotesDiv);
-//   $entryTitleAndNotesDiv.appendChild($entryTitleDiv);
-//   $entryTitleDiv.appendChild($entryTitle);
-//   $entryTitleDiv.appendChild($penIcon);
-//   $entryTitleAndNotesDiv.appendChild($entryNotes);
-
-//   return $entryDomTree;
-// }
+for (var i = 0; i < data.savedActivities.length; i++) {
+  $renderSavedActivities(data.savedActivities[i]);
+}
