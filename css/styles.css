@@ -1,16 +1,12 @@
 body {
   font-family: Roboto, sans-serif;
-  background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
+  background-size: cover;
+  background-color: rgb(32, 47, 33);
+  /* background-image: url("https://mfiles.alphacoders.com/629/629576.jpg"); */
 }
 
 /* ///////////////////////////////DESKTOP/ */
 @media screen and (min-width: 768px) {
-  body {
-    background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
-    background-size: cover;
-    background-color: black;
-  }
-
   header h2 {
     margin-left: 180px;
     font-size: 15px;
@@ -112,6 +108,16 @@ body {
 
   .home-button {
     margin-right: 50px;
+  }
+
+  .nothing-saved {
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 28px;
+    margin-top: 180px;
   }
 }
 
@@ -231,6 +237,16 @@ header a {
   .info-category-last {
     margin-bottom: 60px;
   }
+
+  .nothing-saved {
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 180px;
+  }
 }
 
 .dropdown-label {
@@ -259,4 +275,10 @@ option {
 
 .hide {
   display: none;
+}
+
+.unordered-list {
+  /* text-decoration: none; */
+  padding: 0;
+  /* list-style-type: none; */
 }

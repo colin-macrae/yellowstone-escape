@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +16,8 @@
 </head>
 
 <body>
+
+  <!-- NAVBAR -->
   <header class="navbar">
     <h2>Yellowstone Activities</h2>
     <div>
@@ -23,9 +26,13 @@
     </div>
   </header>
   <div class="container">
+    <ul class="unordered-list hide"></ul>
+    <div>
+      <p class="nothing-saved hide">No activities have been saved. What are you waiting for?</p>
+    </div>
     <main>
       <!-- HOME SCREEN -->
-      <div class="dropdown-container home-view hid">
+      <div class="dropdown-container home-view ">
         <div>
           <label for="activity-select" class="dropdown-label">Choose your activity:</label>
         </div>
@@ -42,8 +49,7 @@
         <h1 class="selected-activity">Selected Activity</h1>
         <div class="activity-card">
 
-          <img src="#" class="activity-image"/>
-
+          <img src="#" class="activity-image" />
           <div class="activity-card-text-container">
             <h2 class="activity-card-title"></h2>
             <p class="activity-card-description"></p>
@@ -63,11 +69,51 @@
               <div class="info-category-label">Fees:&nbsp;&nbsp;</div>
               <div class="fees"></div>
             </div>
-            <a href="#">Add to My Activities</a>
+            <a href="#" class="add-entry-button">Add to My Activities</a>
           </div>
 
         </div>
-      </div>
+
+        <!-- "MY SAVED ACTIVITIES" SCREEN -->
+
+        <!-- //// -->
+        <!-- <div>
+          <p class="nothing-saved">No activities have been saved.  What are you waiting for?</p>
+        </div>
+        <h1 class="my-activities-list">My Activities</h1>
+        <div class="container my-activities-append">DUMMY TEXT</div> -->
+        <!-- //// -->
+
+        <!-- <div class="container my-activities-view hide">
+          <h1 class="selected-activity">My Activities</h1>
+          <div class="activity-card">
+
+            <img src="https://mfiles.alphacoders.com/629/629576.jpg" class="activity-image" />
+
+            <div class="activity-card-text-container">
+              <h2 class="activity-card-title">Grand Gorge of Yellowstone</h2>
+              <p class="activity-card-description">It is truely a wonderful place indeed.  But don't fall in!</p>
+              <div class="info-category">
+                <div class="info-category-label">Location:&nbsp;&nbsp;</div>
+                <div class="location">Irvine</div>
+              </div>
+              <div class="info-category">
+                <div class="info-category-label">Duration:&nbsp;&nbsp;</div>
+                <div class="duration">2 hours</div>
+              </div>
+              <div class="info-category">
+                <div class="info-category-label">Accessibility:&nbsp;&nbsp;</div>
+                <div class="accessibility">If you have disabilities there should be no problem</div>
+              </div>
+              <div class="info-category info-category-last">
+                <div class="info-category-label">Fees:&nbsp;&nbsp;</div>
+                <div class="fees">It's free!</div>
+              </div>
+              <a href="#">Remove from My Activities</a>
+            </div>
+          </div>
+        </div> -->
+
 
     </main>
     <script src="js/data.js"></script>
