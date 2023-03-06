@@ -138,6 +138,7 @@ function $renderSavedActivities(savedActivityObject) {
 
   var $image = document.createElement('img');
   $image.setAttribute('src', 'https://www.nps.gov/common/uploads/cropped_image/44AEEA15-1DD8-B71B-0BA7357E1BA0E948.jpg');
+  $image.setAttribute('alt', 'Photo of yellowstone activity site');
 
   $activityCard.appendChild($image);
 
