@@ -1,16 +1,15 @@
 body {
   font-family: Roboto, sans-serif;
-  background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
+  background-size: cover;
+  background-color: rgb(32, 47, 33);
 }
 
-/* ///////////////////////////////DESKTOP/ */
-@media screen and (min-width: 768px) {
-  body {
-    background-image: url("https://mfiles.alphacoders.com/629/629576.jpg");
-    background-size: cover;
-    background-color: black;
-  }
+img {
+  object-fit: cover;
+}
 
+/* /////////////////////////////////////DESKTOP */
+@media screen and (min-width: 768px) {
   header h2 {
     margin-left: 180px;
     font-size: 15px;
@@ -112,6 +111,22 @@ body {
 
   .home-button {
     margin-right: 50px;
+  }
+
+  .nothing-saved {
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 28px;
+    margin-top: 180px;
+  }
+
+  .my-activities-view-label {
+    color: white;
+    margin: 35px 0 15px;
+    padding: 5px;
   }
 }
 
@@ -228,8 +243,25 @@ header a {
     font-size: 18px;
   }
 
+  .my-activities-view-label {
+    color: white;
+    margin: 5px 0 -10px;
+    padding: 5px;
+    font-size: 18px;
+  }
+
   .info-category-last {
     margin-bottom: 60px;
+  }
+
+  .nothing-saved {
+    text-align: center;
+    color: black;
+    background-color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 180px;
   }
 }
 
@@ -259,4 +291,8 @@ option {
 
 .hide {
   display: none;
+}
+
+.unordered-list {
+  padding: 0;
 }
