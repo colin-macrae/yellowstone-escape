@@ -25,6 +25,7 @@ function $createAndAppend() {
   xhr.send();
 }
 
+// VIEW AN ACTIVITY BUTTON ('GO' BUTTON)
 var $submit = document.querySelector('form');
 $submit.addEventListener('submit', function (e) {
   for (var i = 0; i < data.apiData.length; i++) {
@@ -36,6 +37,7 @@ $submit.addEventListener('submit', function (e) {
   $viewSwap('selected-activity-view');
 });
 
+// FUNCTION FOR 'GO' BUTTON, FOR RENDERING ENTRY
 function renderViewingEntry() {
   document.querySelector('.activity-image').src = data.viewing.images[0].url;
   document.querySelector('.activity-image').alt = data.viewing.images[0].alt;
@@ -50,6 +52,7 @@ function renderViewingEntry() {
   }
 }
 
+// SWAPPING SCREEN VIEWS
 function $viewSwap(viewName) {
   if (viewName === 'home-view') {
     document.querySelector('.home-view').className = 'dropdown-container home-view';
@@ -83,24 +86,6 @@ function $viewSwap(viewName) {
   }
 }
 
-// "MY ACTIVITIES" BUTTON
-if (data.view === 'my-activities-view') {
-  $viewSwap('my-activities-view');
-}
-
-var $myActivitiesButton = document.querySelector('.my-activities-button');
-$myActivitiesButton.addEventListener('click', goToMyActivities);
-function goToMyActivities() {
-  $viewSwap('my-activities-view');
-  if (data.savedActivities === []) {
-    document.querySelector('.nothing-saved').className = 'nothing-saved';
-  } else {
-    for (var i = 0; i < data.savedActivities.length; i++) {
-      $renderSavedActivities(data.savedActivities[i]);
-    }
-  }
-}
-
 // "HOME" BUTTON
 var $homeButton = document.querySelector('.home-button');
 $homeButton.addEventListener('click', goToHome);
@@ -108,6 +93,7 @@ function goToHome() {
   $viewSwap('home-view');
 }
 
+// ADD ACTIVITY TO MY ACTIVITIES BUTTON
 var $addActivityButton = document.querySelector('.add-entry-button');
 $addActivityButton.addEventListener('click', $addEntryAndGoTo);
 function $addEntryAndGoTo(e) {
@@ -118,8 +104,27 @@ function $addEntryAndGoTo(e) {
   for (var i = 0; i < data.savedActivities.length; i++) {
     $renderSavedActivities(data.savedActivities[i]);
   }
+  // location.reload();
+  data.viewing = null;
   $viewSwap('my-activities-view');
-  location.reload();
+}
+
+// VIEW "MY ACTIVITIES" BUTTON
+// if (data.view === 'my-activities-view') {
+//   $viewSwap('my-activities-view');
+// }
+
+var $myActivitiesButton = document.querySelector('.my-activities-button');
+$myActivitiesButton.addEventListener('click', goToMyActivities);
+function goToMyActivities(e) {
+  if (data.savedActivities === []) {
+    document.querySelector('.nothing-saved').className = 'nothing-saved';
+  } else {
+    for (var i = 0; i < data.savedActivities.length; i++) {
+      $renderSavedActivities(data.savedActivities[i]);
+    }
+  }
+  $viewSwap('my-activities-view');
 }
 
 var $selectedActivity = document.createElement('h1');
@@ -215,6 +220,35 @@ function $renderSavedActivities(savedActivityObject) {
   $feesInfoCategoryDiv.appendChild($infoCategoryFeesLabel);
   $feesInfoCategoryDiv.appendChild($infoCategoryFeesInfo);
 
+  // "my notes" section
+  var $myNotesFormContainer = document.createElement('div');
+  $myNotesFormContainer.setAttribute('class', 'my-notes-form-container');
+  $activityCardTextContainer.appendChild($myNotesFormContainer);
+
+  var $myNotesForm = document.createElement('div');
+  $myNotesForm.setAttribute('class', 'my-notes-form');
+  $myNotesForm.setAttribute('name', 'mynotesformname');
+  $myNotesFormContainer.appendChild($myNotesForm);
+
+  var $notesTextboxLabel = document.createElement('div');
+  // $notesTextboxLabel.setAttribute('for', 'notes-textbox');
+  $notesTextboxLabel.setAttribute('class', 'notes-textbox-label');
+  $notesTextboxLabel.textContent = 'My notes';
+  $myNotesForm.appendChild($notesTextboxLabel);
+
+  var $notesTextbox = document.createElement('div');
+  $notesTextbox.setAttribute('class', 'notes-textbox');
+  $myNotesForm.appendChild($notesTextbox);
+
+  var $notesSaveButtonDiv = document.createElement('div');
+  $notesSaveButtonDiv.setAttribute('class', 'notes-save-div');
+  $myNotesForm.appendChild($notesSaveButtonDiv);
+
+  var $notesSaveButton = document.createElement('button');
+  $notesSaveButton.setAttribute('class', 'notes-save-button');
+  $notesSaveButton.textContent = 'Write/Edit notes';
+  $notesSaveButtonDiv.appendChild($notesSaveButton);
+
   // "Remove from my activities" button
   var $removeFromActivitiesButton = document.createElement('a');
   $removeFromActivitiesButton.setAttribute('href', '#');
@@ -226,6 +260,8 @@ function $renderSavedActivities(savedActivityObject) {
   $unorderedList.appendChild($myActivitiesContainer);
 }
 
-for (var i = 0; i < data.savedActivities.length; i++) {
-  $renderSavedActivities(data.savedActivities[i]);
-}
+// right now, when viewing 'my activities' after adding a new one, OR clicking 'my activities', it takes you there, no problem, and all correct entries show up. however, if the screen is refreshed, they disappear, UNLESS i have the below function on (so it renders when page loads).  BUT, then when you click on 'my entries', all entries are duplicated.  so neither of above works perfectly.  leaving it the way it is for now in order to move on
+// for (var i = 0; i < data.savedActivities.length; i++) {
+//   $renderSavedActivities(data.savedActivities[i]);
+// }
+// console.log(data.savedActivities);

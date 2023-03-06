@@ -16,24 +16,26 @@
 </head>
 
 <body>
+  <main>
+    <!-- NAVBAR -->
+    <header class="navbar">
+      <h2>Yellowstone Activities</h2>
+      <div>
+        <a href="#" class="home-button hide">Home</a>
+        <a class="my-activities-button" href="#">My Activities</a>
+      </div>
+    </header>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <h2>Yellowstone Activities</h2>
-    <div>
-      <a href="#" class="home-button hide">Home</a>
-      <a class="my-activities-button" href="#">My Activities</a>
-    </div>
-  </header>
-  <div class="container">
-    <h1 class="my-activities-view-label hide">My Activities</h1>
-    <ul class="unordered-list hide"></ul>
-    <div>
-      <p class="nothing-saved hide">No activities have been saved. What are you waiting for?</p>
-    </div>
-    <main>
+    <!-- BODY -->
+    <div class="container">
+      <h1 class="my-activities-view-label hide">My Activities</h1>
+      <ul class="unordered-list hide"></ul>
+      <div>
+        <p class="nothing-saved hide">No activities have been saved. What are you waiting for?</p>
+      </div>
+
       <!-- HOME SCREEN -->
-      <div class="dropdown-container home-view ">
+      <div class="dropdown-container home-view">
         <div>
           <label for="activity-select" class="dropdown-label">Choose your activity:</label>
         </div>
@@ -49,7 +51,6 @@
       <div class="container selected-activity-view hide">
         <h1 class="selected-activity">Selected Activity</h1>
         <div class="activity-card">
-
           <img src="#" class="activity-image" />
           <div class="activity-card-text-container">
             <h2 class="activity-card-title"></h2>
@@ -72,13 +73,61 @@
             </div>
             <a href="#" class="add-entry-button">Add to My Activities</a>
           </div>
+        </div>
+      </div>
+
+      <!-- WRITING/EDITING NOTES SCREEN -->
+      <div class="container writing-editing-notes-view ">
+        <h1 class="selected-activity">Notes</h1>
+        <div class="activity-card">
+
+          <img src="#" class="activity-image" />
+          <div class="activity-card-text-container">
+            <h2 class="activity-card-title"></h2>
+            <p class="activity-card-description"></p>
+            <div class="info-category">
+              <div class="info-category-label">Location:</div>
+              <div class="location"></div>
+            </div>
+            <div class="info-category">
+              <div class="info-category-label">Duration:</div>
+              <div class="duration"></div>
+            </div>
+            <div class="info-category">
+              <div class="info-category-label">Accessibility:</div>
+              <div class="accessibility"></div>
+            </div>
+            <div class="info-category info-category-last viewing-fees">
+              <div class="info-category-label">Fees:</div>
+              <div class="fees"></div>
+            </div>
+            <a href="#" class="add-entry-button">Add to My Activities</a>
+          </div>
+
+          <!-- NOTES SECTION START -->
+          <div class="my-notes-form-container">
+            <form class="my-notes-form">
+              <label for="notes-textbox" class="notes-textbox-label">
+                My notes
+              </label>
+              <textarea class="notes-textbox"></textarea>
+              <div class="notes-save-div">
+                <button class="notes-save-button">Save and go to My Activities</button>
+              </div>
+            </form>
+          </div>
+          <!-- NOTES SECTION END -->
 
         </div>
+      </div>
 
-    </main>
-    <script src="js/data.js"></script>
-    <script src="js/main.js"></script>
-  </div>
+      <!-- NOTES SECTION FOR SAVED ACTIVITIES LIST -->
+
+
+    </div>
+  </main>
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
