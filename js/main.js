@@ -254,6 +254,7 @@ function $renderSavedActivities(savedActivityObject) {
 
   var $notesTextbox = document.createElement('div');
   $notesTextbox.setAttribute('class', 'notes-textbox');
+  $notesTextbox.textContent = savedActivityObject.notes;
   $myNotesForm.appendChild($notesTextbox);
 
   var $notesSaveButtonDiv = document.createElement('div');
@@ -285,6 +286,7 @@ function $renderSavedActivities(savedActivityObject) {
 
 // "Write/Edit notes" BUTTON
 
+// "write/edit" notes button
 var $editButton = document.querySelector('.unordered-list');
 $editButton.addEventListener('click', $editButtonFunction);
 function $editButtonFunction(e) {
@@ -324,7 +326,7 @@ function renderEditingEntry(entryToEdit) {
     data.editing.doFeesApply = 'No fees';
   }
 }
-renderEditingEntry(data.editing[0]);
+// renderEditingEntry(data.editing[0]);
 
 // = e.target.closest('li').getAttribute('data-entry-id');
 // for (var i = 0; i < data.entries.length; i++) {
@@ -370,3 +372,18 @@ renderEditingEntry(data.editing[0]);
 /// right now i have a couple of problems
 // 1)  i can't add the entryID to the button attribute (or other nearby attribute)
 // 2) i can't get my listener to get the nearest h2 element so i can get its text content (to use it to find the entry in saved entries)
+console.log(data.editing);
+var saveNotesButton = document.querySelector('.notes-save-button');
+saveNotesButton.addEventListener('click', saveNotesFunction);
+function saveNotesFunction(e) {
+  data.editing.notes = document.forms[1].elements.notes.value;
+  // console.log(data.editing.notes);
+  // $newObj.title = document.forms[0].elements.title.value;
+  // console.log(document.forms[1].elements.notes.value);
+  for (var i = 0; i < data.savedActivities.length; i++) {
+    if (data.editing.title === data.savedActivities[i].title) {
+      data.savedActivities[i] = data.editing;
+    }
+  }
+
+}
