@@ -109,6 +109,12 @@ function $addEntryAndGoTo(e) {
   $viewSwap('my-activities-view');
 }
 
+// how can you copy that savedActivityId and put it on an attribute of each saved entry? not only on the object?
+// ANSWER:
+// create an attribute on the dom which will be on each entry (on a button is fine), data-saved-activity-id="", for example
+// in the $addActivityButton handler, set the attribute value to that value
+// now, use this to access that value when the button is clicked (getAttribute or sth), and find the object with that id for editing
+
 // VIEW "MY ACTIVITIES" BUTTON
 // if (data.view === 'my-activities-view') {
 //   $viewSwap('my-activities-view');
@@ -245,7 +251,8 @@ function $renderSavedActivities(savedActivityObject) {
   $myNotesForm.appendChild($notesSaveButtonDiv);
 
   var $notesSaveButton = document.createElement('button');
-  $notesSaveButton.setAttribute('class', 'notes-save-button');
+  $notesSaveButton.setAttribute('class', 'notes-save-button notes-write-edit-button');
+  // $notesSaveButton.setAttribute('data-saved-activity-id', data.savedActivities);
   $notesSaveButton.textContent = 'Write/Edit notes';
   $notesSaveButtonDiv.appendChild($notesSaveButton);
 
@@ -265,3 +272,68 @@ function $renderSavedActivities(savedActivityObject) {
 //   $renderSavedActivities(data.savedActivities[i]);
 // }
 // console.log(data.savedActivities);
+
+// "Write/Edit notes" BUTTON
+
+var $editButton = document.querySelector('.unordered-list');
+$editButton.addEventListener('click', $editButtonFunction);
+function $editButtonFunction(e) {
+  if (e.target.tagName === 'BUTTON') {
+    // console.log('edit button clicked');
+    // console.log(e.target.closest('button').getAttribute('data-saved-activity-id'));
+    // var editButtonClosestTitle = e.target.closest('h2');
+    // // console.log(editButtonClosestTitle);
+    // console.log(e.target.closest('h2').textContent);
+    var closestDiv = e.target.closest('ul > div > div > div');
+    console.log('closestDiv\'s text content', '(or entry title):', closestDiv.childNodes[0].textContent);
+    // console.log('e', e.target.closest('ul > div > div > div > h2'));
+  }
+
+  // var editButtonClosestTitle = e.target.closest('h2').textContent;
+  // console.log(editButtonClosestTitle);
+}
+
+// = e.target.closest('li').getAttribute('data-entry-id');
+// for (var i = 0; i < data.entries.length; i++) {
+//   if (Number($pensClosestEntryId) === data.entries[i].entryId) {
+//     data.editing = data.entries[i];
+//   }
+// }
+
+// var $ul = document.querySelector('.ul-no-bullets');
+// $ul.addEventListener('click', $penButtonFunction);
+// function $penButtonFunction(e) {
+
+//   if (e.target.tagName === 'I') {
+//     $viewSwap('entry-form');
+//     var $deleteButton = document.querySelector('.delete-button');
+//     $deleteButton.className = 'delete-button';
+//   }
+
+//   var $pensClosestEntryId = e.target.closest('li').getAttribute('data-entry-id');
+//   for (var i = 0; i < data.entries.length; i++) {
+//     if (Number($pensClosestEntryId) === data.entries[i].entryId) {
+//       data.editing = data.entries[i];
+//     }
+//   }
+
+//   var $image = document.querySelector('.image');
+//   $image.src = data.editing.url;
+
+//   var $titleInputField = document.querySelector('#title-id');
+//   $titleInputField.value = data.editing.title;
+
+//   var $urlInputField = document.querySelector('#photo-url-id');
+//   $urlInputField.value = data.editing.url;
+
+//   var $notesInputField = document.querySelector('.notes');
+//   $notesInputField.value = data.editing.notes;
+
+//   var $newEntryTitle = document.querySelector('#new-entry-edit-entry');
+//   $newEntryTitle.textContent = 'Edit Entry';
+// }
+
+
+/// right now i have a couple of problems
+// 1)  i can't add the entryID to the button attribute (or other nearby attribute)
+// 2) i can't get my listener to get the nearest h2 element so i can get its text content (to use it to find the entry in saved entries)
