@@ -62,6 +62,7 @@ function $viewSwap(viewName) {
     document.querySelector('.my-activities-button').className = 'my-activities-button';
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
+    document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view hide';
     data.view = 'home-view';
   } if (viewName === 'selected-activity-view') {
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view';
@@ -70,6 +71,7 @@ function $viewSwap(viewName) {
     document.querySelector('.my-activities-button').className = 'my-activities-button';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
+    document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view hide';
     data.view = 'selected-activity-view';
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
   } if (viewName === 'my-activities-view') {
@@ -78,11 +80,19 @@ function $viewSwap(viewName) {
     document.querySelector('.unordered-list').className = 'unordered-list';
     document.querySelector('.home-button').className = 'home-button';
     document.querySelector('.my-activities-button').className = 'my-activities-button hide';
+    document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label';
     data.view = 'my-activities-view';
     if (data.savedActivities.length === 0) {
       document.querySelector('.nothing-saved').className = 'nothing-saved';
     }
+  } if (viewName === 'writing-editing-notes-view') {
+    document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view';
+    document.querySelector('.home-view').className = 'dropdown-container home-view hide';
+    document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
+
+    document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
+    document.querySelector('.unordered-list').className = 'unordered-list hide';
   }
 }
 
@@ -289,7 +299,9 @@ function $editButtonFunction(e) {
     for (var i = 0; i < data.savedActivities.length; i++) {
       if (data.savedActivities[i].title === closestDiv.childNodes[0].textContent) {
         console.log('match found');
-        
+        data.editing = data.savedActivities[i];
+        renderEditingEntry(data.editing[0]);
+        $viewSwap('writing-editing-notes-view');
       } else console.log('no match found');
     }
     // console.log('e', e.target.closest('ul > div > div > div > h2'));
@@ -298,6 +310,21 @@ function $editButtonFunction(e) {
   // var editButtonClosestTitle = e.target.closest('h2').textContent;
   // console.log(editButtonClosestTitle);
 }
+
+function renderEditingEntry(entryToEdit) {
+  document.querySelector('.editing-activity-image').src = data.editing.images[0].url;
+  document.querySelector('.editing-activity-image').alt = data.editing.images[0].alt;
+  document.querySelector('.editing-activity-card-title').innerHTML = data.editing.title;
+  document.querySelector('.editing-activity-card-description').innerHTML = data.editing.shortDescription;
+  document.querySelector('.editing-activity-location').innerHTML = data.editing.locationDescription;
+  document.querySelector('.editing-activity-duration').innerHTML = data.editing.duration;
+  document.querySelector('.editing-activity-accessibility').innerHTML = data.editing.accessibilityInformation;
+  document.querySelector('.editing-activity-fees').innerHTML = data.editing.doFeesApply;
+  if (data.editing.doFeesApply === 'false') {
+    data.editing.doFeesApply = 'No fees';
+  }
+}
+renderEditingEntry(data.editing[0]);
 
 // = e.target.closest('li').getAttribute('data-entry-id');
 // for (var i = 0; i < data.entries.length; i++) {
