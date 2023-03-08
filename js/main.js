@@ -286,6 +286,12 @@ function $editButtonFunction(e) {
     // console.log(e.target.closest('h2').textContent);
     var closestDiv = e.target.closest('ul > div > div > div');
     console.log('closestDiv\'s text content', '(or entry title):', closestDiv.childNodes[0].textContent);
+    for (var i = 0; i < data.savedActivities.length; i++) {
+      if (data.savedActivities[i].title === closestDiv.childNodes[0].textContent) {
+        console.log('match found');
+        
+      } else console.log('no match found');
+    }
     // console.log('e', e.target.closest('ul > div > div > div > h2'));
   }
 
