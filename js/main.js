@@ -57,7 +57,6 @@ function $viewSwap(viewName) {
   if (viewName === 'home-view') {
     document.querySelector('.home-view').className = 'dropdown-container home-view';
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
-    document.querySelector('.home-button').className = 'home-button hide';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-button').className = 'my-activities-button';
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
@@ -79,7 +78,6 @@ function $viewSwap(viewName) {
     document.querySelector('.home-view').className = 'dropdown-container home-view hide';
     document.querySelector('.unordered-list').className = 'unordered-list';
     document.querySelector('.home-button').className = 'home-button';
-    document.querySelector('.my-activities-button').className = 'my-activities-button hide';
     document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label';
     data.view = 'my-activities-view';
@@ -107,7 +105,12 @@ function goToHome() {
 var $addActivityButton = document.querySelector('.add-entry-button');
 $addActivityButton.addEventListener('click', $addEntryAndGoTo);
 function $addEntryAndGoTo(e) {
-  data.viewing.savedActivityId = data.nextSavedActivityId;
+  for (var j = 0; j < data.savedActivities.length; j++) {
+    if (data.savedActivities[j].title === data.viewing.title) {
+      alert('This activity has already been saved and was not re-saved.  Please click on "My Activities" to locate your saved activity');
+      return;
+    }
+  } data.viewing.savedActivityId = data.nextSavedActivityId;
   data.nextSavedActivityId += 1;
   data.savedActivities.unshift(data.viewing);
   document.querySelector('.my-activities-button').setAttribute('class', 'my-activities-button hide');
@@ -119,17 +122,10 @@ function $addEntryAndGoTo(e) {
   $viewSwap('my-activities-view');
 }
 
-// how can you copy that savedActivityId and put it on an attribute of each saved entry? not only on the object?
-// ANSWER:
-// create an attribute on the dom which will be on each entry (on a button is fine), data-saved-activity-id="", for example
-// in the $addActivityButton handler, set the attribute value to that value
-// now, use this to access that value when the button is clicked (getAttribute or sth), and find the object with that id for editing
-
 // VIEW "MY ACTIVITIES" BUTTON
 // if (data.view === 'my-activities-view') {
 //   $viewSwap('my-activities-view');
 // }
-
 var $myActivitiesButton = document.querySelector('.my-activities-button');
 $myActivitiesButton.addEventListener('click', goToMyActivities);
 function goToMyActivities(e) {
@@ -284,33 +280,22 @@ function $renderSavedActivities(savedActivityObject) {
 // }
 // console.log(data.savedActivities);
 
-// "Write/Edit notes" BUTTON
-
 // "write/edit" notes button
 var $editButton = document.querySelector('.unordered-list');
 $editButton.addEventListener('click', $editButtonFunction);
 function $editButtonFunction(e) {
   if (e.target.tagName === 'BUTTON') {
-    // console.log('edit button clicked');
-    // console.log(e.target.closest('button').getAttribute('data-saved-activity-id'));
-    // var editButtonClosestTitle = e.target.closest('h2');
-    // // console.log(editButtonClosestTitle);
-    // console.log(e.target.closest('h2').textContent);
     var closestDiv = e.target.closest('ul > div > div > div');
-    console.log('closestDiv\'s text content', '(or entry title):', closestDiv.childNodes[0].textContent);
     for (var i = 0; i < data.savedActivities.length; i++) {
       if (data.savedActivities[i].title === closestDiv.childNodes[0].textContent) {
-        console.log('match found');
         data.editing = data.savedActivities[i];
+        var notesInputField = document.querySelector('.notes-textbox-prepopulate');
+        notesInputField.value = data.savedActivities[i].notes;
         renderEditingEntry(data.editing[0]);
         $viewSwap('writing-editing-notes-view');
-      } else console.log('no match found');
+      }
     }
-    // console.log('e', e.target.closest('ul > div > div > div > h2'));
   }
-
-  // var editButtonClosestTitle = e.target.closest('h2').textContent;
-  // console.log(editButtonClosestTitle);
 }
 
 function renderEditingEntry(entryToEdit) {
@@ -326,64 +311,27 @@ function renderEditingEntry(entryToEdit) {
     data.editing.doFeesApply = 'No fees';
   }
 }
-// renderEditingEntry(data.editing[0]);
-
-// = e.target.closest('li').getAttribute('data-entry-id');
-// for (var i = 0; i < data.entries.length; i++) {
-//   if (Number($pensClosestEntryId) === data.entries[i].entryId) {
-//     data.editing = data.entries[i];
-//   }
-// }
-
-// var $ul = document.querySelector('.ul-no-bullets');
-// $ul.addEventListener('click', $penButtonFunction);
-// function $penButtonFunction(e) {
-
-//   if (e.target.tagName === 'I') {
-//     $viewSwap('entry-form');
-//     var $deleteButton = document.querySelector('.delete-button');
-//     $deleteButton.className = 'delete-button';
-//   }
-
-//   var $pensClosestEntryId = e.target.closest('li').getAttribute('data-entry-id');
-//   for (var i = 0; i < data.entries.length; i++) {
-//     if (Number($pensClosestEntryId) === data.entries[i].entryId) {
-//       data.editing = data.entries[i];
-//     }
-//   }
-
-//   var $image = document.querySelector('.image');
-//   $image.src = data.editing.url;
-
-//   var $titleInputField = document.querySelector('#title-id');
-//   $titleInputField.value = data.editing.title;
-
-//   var $urlInputField = document.querySelector('#photo-url-id');
-//   $urlInputField.value = data.editing.url;
-
-//   var $notesInputField = document.querySelector('.notes');
-//   $notesInputField.value = data.editing.notes;
-
-//   var $newEntryTitle = document.querySelector('#new-entry-edit-entry');
-//   $newEntryTitle.textContent = 'Edit Entry';
-// }
-
 
 /// right now i have a couple of problems
 // 1)  i can't add the entryID to the button attribute (or other nearby attribute)
 // 2) i can't get my listener to get the nearest h2 element so i can get its text content (to use it to find the entry in saved entries)
-console.log(data.editing);
 var saveNotesButton = document.querySelector('.notes-save-button');
 saveNotesButton.addEventListener('click', saveNotesFunction);
 function saveNotesFunction(e) {
   data.editing.notes = document.forms[1].elements.notes.value;
-  // console.log(data.editing.notes);
-  // $newObj.title = document.forms[0].elements.title.value;
-  // console.log(document.forms[1].elements.notes.value);
   for (var i = 0; i < data.savedActivities.length; i++) {
     if (data.editing.title === data.savedActivities[i].title) {
       data.savedActivities[i] = data.editing;
+      $viewSwap('my-activities-view');
     }
   }
-
 }
+
+// TO DO (FUNCTIONALITY AND ISSUES/BUGS)
+// functionality to add //////////////////////////////////
+// when edit notes is pressed, the previous notes appear on editing screen (not blank)
+// outstanding issues: ///////////////////////////////////
+// CORS error upon going to 'my activities' so all set to same photo
+// activities all disappear from screen after saving notes
+// duplicates appear when clicking "my activities"
+// the above to don't actually cause problems in data.savedActivities on the object, and they render correctly, only when "Save this activity" is pressed and ur taken to the list
