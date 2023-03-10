@@ -16,13 +16,16 @@ function $createAndAppend() {
   xhr.addEventListener('load', function () {
     data.apiData = xhr.response.data;
     for (var i = 0; i < xhr.response.data.length; i++) {
-      var thingToDo = xhr.response.data[i];
+      var yellActivitiesList = xhr.response.data[i];
       var $option = document.createElement('option');
-      $option.textContent = thingToDo.title;
+      $option.textContent = yellActivitiesList.title;
       $select.appendChild($option);
     }
   });
   xhr.send();
+  for (var i = 0; i < data.savedActivities.length; i++) {
+    $renderSavedActivities(data.savedActivities[i]);
+  }
 }
 
 // VIEW AN ACTIVITY BUTTON ('GO' BUTTON)
@@ -37,7 +40,7 @@ $submit.addEventListener('submit', function (e) {
   $viewSwap('selected-activity-view');
 });
 
-// FUNCTION FOR 'GO' BUTTON, FOR RENDERING ENTRY
+// FUNCTION FOR 'GO' BUTTON, FOR RENDERING, VIEWING ENTRY
 function renderViewingEntry() {
   document.querySelector('.activity-image').src = data.viewing.images[0].url;
   document.querySelector('.activity-image').alt = data.viewing.images[0].alt;
@@ -71,8 +74,8 @@ function $viewSwap(viewName) {
     document.querySelector('.unordered-list').className = 'unordered-list hide';
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
     document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view hide';
-    data.view = 'selected-activity-view';
     document.querySelector('.nothing-saved').className = 'nothing-saved hide';
+    data.view = 'selected-activity-view';
   } if (viewName === 'my-activities-view') {
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
     document.querySelector('.home-view').className = 'dropdown-container home-view hide';
@@ -88,9 +91,9 @@ function $viewSwap(viewName) {
     document.querySelector('.writing-editing-notes-view').className = 'container writing-editing-notes-view';
     document.querySelector('.home-view').className = 'dropdown-container home-view hide';
     document.querySelector('.selected-activity-view').className = 'container selected-activity-view hide';
-
     document.querySelector('.my-activities-view-label').className = 'my-activities-view-label hide';
     document.querySelector('.unordered-list').className = 'unordered-list hide';
+    data.view = 'writing-editing-notes-view';
   }
 }
 
@@ -107,41 +110,23 @@ $addActivityButton.addEventListener('click', $addEntryAndGoTo);
 function $addEntryAndGoTo(e) {
   for (var j = 0; j < data.savedActivities.length; j++) {
     if (data.savedActivities[j].title === data.viewing.title) {
-      alert('This activity has already been saved and was not re-saved.  Please click on "My Activities" to locate your saved activity');
+      alert('This activity has already been saved.  Please click on "My Activities" to locate your saved activity');
       return;
     }
   } data.viewing.savedActivityId = data.nextSavedActivityId;
   data.nextSavedActivityId += 1;
   data.savedActivities.unshift(data.viewing);
-  document.querySelector('.my-activities-button').setAttribute('class', 'my-activities-button hide');
-  for (var i = 0; i < data.savedActivities.length; i++) {
-    $renderSavedActivities(data.savedActivities[i]);
-  }
-  // location.reload();
+  $renderSavedActivities(data.viewing);
   data.viewing = null;
   $viewSwap('my-activities-view');
 }
 
 // VIEW "MY ACTIVITIES" BUTTON
-// if (data.view === 'my-activities-view') {
-//   $viewSwap('my-activities-view');
-// }
 var $myActivitiesButton = document.querySelector('.my-activities-button');
 $myActivitiesButton.addEventListener('click', goToMyActivities);
 function goToMyActivities(e) {
-  if (data.savedActivities === []) {
-    document.querySelector('.nothing-saved').className = 'nothing-saved';
-  } else {
-    for (var i = 0; i < data.savedActivities.length; i++) {
-      $renderSavedActivities(data.savedActivities[i]);
-    }
-  }
   $viewSwap('my-activities-view');
 }
-
-var $selectedActivity = document.createElement('h1');
-$selectedActivity.setAttribute('class', 'selected-activity');
-$selectedActivity.textContent = '';
 
 function $renderSavedActivities(savedActivityObject) {
 
@@ -150,11 +135,10 @@ function $renderSavedActivities(savedActivityObject) {
 
   var $activityCard = document.createElement('div');
   $activityCard.setAttribute('class', 'activity-card');
-  $myActivitiesContainer.appendChild($selectedActivity);
   $myActivitiesContainer.appendChild($activityCard);
 
   var $image = document.createElement('img');
-  $image.setAttribute('src', 'https://www.nps.gov/common/uploads/cropped_image/44AEEA15-1DD8-B71B-0BA7357E1BA0E948.jpg');
+  $image.setAttribute('src', savedActivityObject.images[0].url);
   $image.setAttribute('alt', 'Photo of yellowstone activity site');
 
   $activityCard.appendChild($image);
@@ -243,7 +227,6 @@ function $renderSavedActivities(savedActivityObject) {
   $myNotesFormContainer.appendChild($myNotesForm);
 
   var $notesTextboxLabel = document.createElement('div');
-  // $notesTextboxLabel.setAttribute('for', 'notes-textbox');
   $notesTextboxLabel.setAttribute('class', 'notes-textbox-label');
   $notesTextboxLabel.textContent = 'My notes';
   $myNotesForm.appendChild($notesTextboxLabel);
@@ -259,7 +242,6 @@ function $renderSavedActivities(savedActivityObject) {
 
   var $notesSaveButton = document.createElement('button');
   $notesSaveButton.setAttribute('class', 'notes-save-button notes-write-edit-button');
-  // $notesSaveButton.setAttribute('data-saved-activity-id', data.savedActivities);
   $notesSaveButton.textContent = 'Write/Edit notes';
   $notesSaveButtonDiv.appendChild($notesSaveButton);
 
@@ -274,12 +256,6 @@ function $renderSavedActivities(savedActivityObject) {
   $unorderedList.appendChild($myActivitiesContainer);
 }
 
-// right now, when viewing 'my activities' after adding a new one, OR clicking 'my activities', it takes you there, no problem, and all correct entries show up. however, if the screen is refreshed, they disappear, UNLESS i have the below function on (so it renders when page loads).  BUT, then when you click on 'my entries', all entries are duplicated.  so neither of above works perfectly.  leaving it the way it is for now in order to move on
-// for (var i = 0; i < data.savedActivities.length; i++) {
-//   $renderSavedActivities(data.savedActivities[i]);
-// }
-// console.log(data.savedActivities);
-
 // "write/edit" notes button
 var $editButton = document.querySelector('.unordered-list');
 $editButton.addEventListener('click', $editButtonFunction);
@@ -290,7 +266,11 @@ function $editButtonFunction(e) {
       if (data.savedActivities[i].title === closestDiv.childNodes[0].textContent) {
         data.editing = data.savedActivities[i];
         var notesInputField = document.querySelector('.notes-textbox-prepopulate');
-        notesInputField.value = data.savedActivities[i].notes;
+        if (data.savedActivities[i].notes) {
+          notesInputField.value = data.savedActivities[i].notes;
+        } else {
+          notesInputField.value = null;
+        }
         renderEditingEntry(data.editing[0]);
         $viewSwap('writing-editing-notes-view');
       }
@@ -312,9 +292,6 @@ function renderEditingEntry(entryToEdit) {
   }
 }
 
-/// right now i have a couple of problems
-// 1)  i can't add the entryID to the button attribute (or other nearby attribute)
-// 2) i can't get my listener to get the nearest h2 element so i can get its text content (to use it to find the entry in saved entries)
 var saveNotesButton = document.querySelector('.notes-save-button');
 saveNotesButton.addEventListener('click', saveNotesFunction);
 function saveNotesFunction(e) {
@@ -326,12 +303,3 @@ function saveNotesFunction(e) {
     }
   }
 }
-
-// TO DO (FUNCTIONALITY AND ISSUES/BUGS)
-// functionality to add //////////////////////////////////
-// when edit notes is pressed, the previous notes appear on editing screen (not blank)
-// outstanding issues: ///////////////////////////////////
-// CORS error upon going to 'my activities' so all set to same photo
-// activities all disappear from screen after saving notes
-// duplicates appear when clicking "my activities"
-// the above to don't actually cause problems in data.savedActivities on the object, and they render correctly, only when "Save this activity" is pressed and ur taken to the list

@@ -8,6 +8,13 @@ img {
   object-fit: cover;
 }
 
+.write-notes-view-label {
+  color: white;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 18px;
+}
+
 /* TEXTBOX, MY NOTES LABEL AND MY NOTES FORM AND SAVE BUTTON */
 .notes-save-button {
   background-color: rgb(99, 56, 13);
