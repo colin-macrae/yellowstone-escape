@@ -2,11 +2,11 @@ if (data.viewing !== null) {
   renderViewingEntry();
 }
 $viewSwap(data.view);
-document.addEventListener('DOMContentLoaded', $createAndAppend);
 
-// API REQUESTS
+document.addEventListener('DOMContentLoaded', $createAndAppend);
 var targetUrl = encodeURIComponent('https://developer.nps.gov/api/v1/thingstodo?parkCode=yell&api_key=iSpPR5udcPCzijjVFDgRMe2hLAfepOt9jbFeGFjX');
 
+// API REQUESTS
 function $createAndAppend() {
   var $select = document.querySelector('select');
   var xhr = new XMLHttpRequest();
@@ -144,7 +144,7 @@ function $renderSavedActivities(savedActivityObject) {
   $activityCard.appendChild($image);
 
   var $activityCardTextContainer = document.createElement('div');
-  $activityCardTextContainer.setAttribute('class', 'activity-card-text-container');
+  $activityCardTextContainer.setAttribute('class', 'activity-card-text-container my-activity-card-text-container');
   $activityCard.appendChild($activityCardTextContainer);
 
   var $activityCardTitle = document.createElement('h2');
@@ -248,6 +248,7 @@ function $renderSavedActivities(savedActivityObject) {
   // "Remove from my activities" button
   var $removeFromActivitiesButton = document.createElement('a');
   $removeFromActivitiesButton.setAttribute('href', '#');
+  $removeFromActivitiesButton.setAttribute('class', 'remove-activity-button');
   $removeFromActivitiesButton.textContent = 'Remove from My Activities';
   $activityCardTextContainer.appendChild($removeFromActivitiesButton);
 
@@ -300,6 +301,25 @@ function saveNotesFunction(e) {
     if (data.editing.title === data.savedActivities[i].title) {
       data.savedActivities[i] = data.editing;
       $viewSwap('my-activities-view');
+    }
+  }
+}
+
+// DELETE AN ACTIVITY FROM MY ACTIVITIES
+var $savedActivitiesContainer = document.querySelector('.unordered-list');
+$savedActivitiesContainer.addEventListener('click', $removeEntry);
+
+function $removeEntry(e) {
+  if (e.target.tagName === 'A') {
+    var closestDiv = e.target.closest('ul > div > div > div');
+    var $h2titleText = closestDiv.childNodes[0].textContent;
+    alert('You just deleted an activity from your saved activities list');
+    for (var j = 0; j < data.savedActivities.length; j++) {
+      if (data.savedActivities[j].title === $h2titleText) {
+        data.savedActivities.splice(j, 1);
+        $viewSwap('home-view');
+        location.reload();
+      }
     }
   }
 }

@@ -21,6 +21,16 @@ img {
   color: white;
   border: none;
   height: 30px;
+  width: 220px;
+  border-radius: 5px;
+  margin: 5px 0 0;
+}
+
+.notes-write-edit-button {
+  background-color: rgb(99, 56, 13);
+  color: white;
+  border: none;
+  height: 30px;
   width: 120px;
   border-radius: 5px;
   margin: 5px 0 0;
@@ -50,7 +60,7 @@ img {
 .my-notes-form-container {
   padding: 10px;
   margin-bottom: 70px;
-  margin-top: -20px;
+  margin-top: -60px;
 }
 
 /* /////////////////////////////////////DESKTOP */
