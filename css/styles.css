@@ -344,6 +344,11 @@ option {
   margin: 20px 0;
 }
 
+.go-button button:hover,
+.notes-save-button:hover {
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }
