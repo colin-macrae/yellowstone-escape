@@ -7,7 +7,7 @@ This project was an assignment I (Colin) completed during the sixth (of 14) week
 I chose the Naional Parks API because it was easily accessible, had very few limits, had good photography, and involved one of my passions (the outdoors).
 
 Link to live site:
-https://colin-macrae.github.io/ajax-project/
+https://colin-macrae.github.io/yellowstone-escape/
 
 Technologies used:
 - JavaScript
